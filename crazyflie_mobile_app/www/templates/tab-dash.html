@@ -1,0 +1,37 @@
+<ion-view title="Dashboard">
+  <ion-content class="padding">
+    <button class="button button-stable" ng-click="test()">test</button>
+    <h4>TestClick: {{testClick}}</h4>
+
+    <h2 ng-if="error">Error has occured: {{error}}</h2>
+    <!-- button getcurrent -->
+    <button class="button button-stable" ng-click="startWatcher()">Start watcher</button>
+    <button class="button button-stable" ng-click="resetWatcher()">Reset watcher</button>
+
+    <div class="card">
+	  <div class="item item-divider">
+	  	Current acceleration
+	  </div>
+	  <div class="item item-text-wrap">
+	  	Times updated: {{timesUpdated}} <br />
+	    Timestamp: {{acceleration.timestamp}} <br />
+	    x: {{acceleration.x}} <br />
+	    y: {{acceleration.y}} <br />
+	    z: {{acceleration.z}}
+	  </div>
+	</div>
+
+    <button class="button button-stable" ng-click="captureAccel()">Capture acceleration</button>
+	<div class="card">
+	  <div class="item item-divider">
+	  	Captured acceleration
+	  </div>
+	  <div class="item item-text-wrap">
+	    Timestamp: {{capturedAcc.timestamp}} <br />
+	    x: {{capturedAcc.x}} <br />
+	    y: {{capturedAcc.y}} <br />
+	    z: {{capturedAcc.z}}
+	  </div>
+	</div>
+  </ion-content>
+</ion-view>
