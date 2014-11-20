@@ -48,6 +48,12 @@ angular.module('starter.controllers', [])
 	$scope.leftOffset = 125;
 	$scope.topOffset = 125;
 	$scope.options = { frequency: 20 };
+	$scope.val = {
+		x: 0,
+		y: 0
+	}
+
+	// $scope.val = 150;
 	var watch;
 	var xArr = [];
 	var yArr = [];
@@ -84,22 +90,10 @@ angular.module('starter.controllers', [])
 		return [xAverage, yAverage];
 	}
 
-
-	// used to manually manipulate wheel by scope inputs
-	$scope.updateVal = function (val) {
-		var x = parseFloat(val.x);
-		var y = parseInt(val.y);
-
-		$scope.leftOffset = 15 * x + 125;
-		$scope.topOffset = 15 * y + 125;
-	}
-	
-
 	$scope.onUpdateSuccess = function(acc) {
 		var averages = $scope.getEasedValues(acc.x, acc.y);
-
-		$scope.leftOffset = -12*averages[0] + 125;
-		$scope.topOffset = 12*averages[1] + 125;
+		$scope.val.x = averages[0];
+		$scope.val.y = averages[1];
 	};
 
 	$scope.startWatcher = function () {
