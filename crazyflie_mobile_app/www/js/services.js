@@ -23,4 +23,20 @@ angular.module('starter.services', [])
       return friends[friendId];
     }
   }
+})
+
+.service('Settings', function () {
+  this.position = {
+    dominantOnly: false,
+    sensX: 0.5,
+    sensY: 0.5,
+    centerX: 0,
+    centerY: 0
+  };
+
+  this.rotation = {
+    reverse: false,
+    sensitivity: 0.5,
+    returnTime: 2
+  }
 });

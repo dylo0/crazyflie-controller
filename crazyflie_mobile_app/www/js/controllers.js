@@ -50,8 +50,11 @@ angular.module('starter.controllers', [])
 	$scope.options = { frequency: 20 };
 	$scope.val = {
 		x: 0,
-		y: 0
+		y: 0,
+		alpha: 0
 	}
+	$scope.rotation = 0;
+	$scope.rotationScale = 1;
 
 	// $scope.val = 150;
 	var watch;
@@ -128,5 +131,5 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('AccountCtrl', function ($scope) {
+.controller('SettingsCtrl', function ($scope) {
 });

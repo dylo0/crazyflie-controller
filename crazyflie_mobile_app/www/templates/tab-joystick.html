@@ -1,15 +1,31 @@
-<ion-view title="Friends">
-  <ion-content scroll="false">
-  	<div class="list" style="">
+<ion-view title="Pad">
+  <ion-content has-header="true" scroll="false">
+  	
+    <!-- input list browser testing only -->
+<!--     <div class="list" style="">
   	  <label class="item item-input">
-  	    <input type="text" placeholder="X" ng-model="val.x">
+  	    <span class="padding-right"> val x:</span> <input type="text" placeholder="X" ng-model="val.x">
   	  </label>
   	  <label class="item item-input">
-  	    <input type="text" placeholder="Y" ng-model="val.y">
+  	    <span class="padding-right"> val y:</span> <input type="text" placeholder="Y" ng-model="val.y">
   	  </label>
-  	</div>
+      <label class="item item-input">
+        <span class="padding-right"> rotation:</span> <input type="text" placeholder="rotation" ng-model="val.alpha">
+      </label>
+      <label class="item item-input">
+        <span class="padding-right"> rotation scale:</span> <input type="text" placeholder="scale" ng-model="rotationScale">
+      </label>
+  	</div> -->
+
     <div class="row">
-        <accel-joystick coords="val"></accel-joystick>
+        <accel-joystick coords="val" rotation="rotation" rotation-scale="rotation-scale"></accel-joystick>
+    </div>
+    <div class="button-bar">
+    
+      <button class="button button-full button-stable" ng-click="">DOWN</button>
+    
+      <button class="button button-full button-stable" ng-click="">UP</button>
+    
     </div>
   </ion-content>
 </ion-view>
