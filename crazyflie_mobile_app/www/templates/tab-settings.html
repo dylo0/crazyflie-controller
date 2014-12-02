@@ -1,84 +1,74 @@
 <ion-view title="Settings">
   <ion-content class="">
     <h4 class="center padding-top">Controller's settings</h4>
-    <!-- <ul class="list"> -->
-    <!-- Position -->
-	  <!-- <li class="item item-divider">
-	    Position
-	  </li> -->
-	  
-	<div class="list">  
-	  <li class="item item-divider">
-	    Position
-	  </li>
-	  <li class="item item-toggle">
-	     Dominant direction only
-	     <!-- <p>asd</p> -->
-	     <label class="toggle toggle-assertive">
-	       <input type="checkbox">
-	       <div class="track">
-	         <div class="handle"></div>
-	       </div>
-	     </label>
-	  </li>
+    <ul class="list">  
+            
+        <!-- Position -->
+        <li class="item item-divider"> Position </li>
 
-	<li class="item ">
-	    <div class="item-content">X-axis sensitivity</div>
-	    <div class="range range-positive">
-	        <input type="range" name="volume" min="0" max="100" value="33">
-	    </div>
-	</li>
+        <li class="item item-toggle">
+            Dominant direction only
+            <label class="toggle toggle-assertive">
+                <input type="checkbox" ng-model="position.dominantOnly">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </li>
 
-	<li class="item ">
-	    <div class="item-content">Y-axis sensitivity</div>
-	    <div class="range range-positive">
-	        <input type="range" name="volume" min="0" max="100" value="33">
-	    </div>
-	</li>
+        <li class="item ">
+            <div class="item-content">X-axis sensitivity</div>
+            <div class="range range-positive">
+                <input type="range" name="posSensX" min="0" max="1" step="0.01" ng-model="position.sensX" float>
+            </div>
+        </li>
 
-	  <li class="item item-button-right">
-		    Cadibrate position
-		<button class="button button-neutral">
-			<i class="icon ion-cog"></i>
-		</button>
-	  </li>
+        <li class="item ">
+            <div class="item-content">Y-axis sensitivity</div>
+            <div class="range range-positive">
+                <input type="range" name="posSensY" min="0" max="1" step="0.01" ng-model="position.sensY" float>
+            </div>
+        </li>
+
+        <li class="item item-button-right">
+            Cadibrate position
+            <button class="button button-neutral" ng-click="test()">
+                <i class="icon ion-cog"></i>
+            </button>
+        </li>
 
 
-	<!-- <ul class="list"> -->
-	  <!-- rotation -->
-	  <li class="item item-divider">
-	    Rotation
-	  </li>
-	
-	  <div class="item item-toggle">
-	     Reverse direction
-	     <label class="toggle toggle-assertive">
-	       <input type="checkbox">
-	       <div class="track">
-	         <div class="handle"></div>
-	       </div>
-	     </label>
-	  </div>
-	
-	<li class="item ">
-	    <div class="item-content">Rotation Sensitivity</div>
-	    <div class="range range-positive">
-	        <input type="range" name="volume" min="0" max="100" value="33">
-	    </div>
-	</li>
+        <!-- rotation -->
+        <li class="item item-divider">Rotation</li>
+        
+        <li class="item item-toggle">
+            Reverse direction
+            <label class="toggle toggle-assertive">
+                <input type="checkbox" ng-model="rotation.reverse">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </li>
+        
+        <li class="item ">
+            <div class="item-content">Rotation Sensitivity</div>
+            <div class="range range-positive">
+                <input type="range" name="rotSens" min="0" max="1" step="0.01" ng-model="rotation.sensitivity" float>
+            </div>
+        </li>
 
-	<li class="item ">
-	    <div class="item-content">Return time</div>
-	    <div class="range range-positive">
-	        <input type="range" name="volume" min="0" max="100" value="33">
-	    </div>
-	    <div class="item-footer">
-	    <p>Time uppon which joystick will return to default position</p>
-	    </div>
-	</li>
-
-	  <!-- sensitivity -->
-	  <!-- return time -->
-	</ul>
+        <li class="item ">
+            <div class="item-content">Return time [s]</div>
+            <div class="range range-positive">
+                0
+                <input type="range" name="rotReturn" min="0" max="10" step="0.1" ng-model="rotation.returnTime" float>
+                10
+            </div>
+            <div class="item-footer">
+                <p>Time uppon which joystick will return to default position</p>
+            </div>
+        </li>
+    </ul>
   </ion-content>
 </ion-view>

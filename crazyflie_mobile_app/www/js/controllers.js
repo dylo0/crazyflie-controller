@@ -42,6 +42,7 @@ angular.module('starter.controllers', [])
 	$scope.captureAccel = function () {
 		$cordovaDeviceMotion.getCurrentAcceleration().then($scope.onCaptureSuccess, $scope.onError);
 	}
+
 })
 
 .controller('JoystickCtrl', function ($scope, $ionicPlatform, $cordovaDeviceMotion, $ionicPopup) {
@@ -131,5 +132,20 @@ angular.module('starter.controllers', [])
   $scope.friend = Friends.get($stateParams.friendId);
 })
 
-.controller('SettingsCtrl', function ($scope) {
+.controller('SettingsCtrl', function ($scope, Settings) {
+	$scope.position = Settings.position;
+	$scope.rotation = Settings.rotation;
+
+	$scope.test = function () {
+		console.log(Settings);
+	}
+
+	$scope.updateParam = function(param, val) {
+		Settings[param] = val;
+	}
 });
+
+
+
+
+
