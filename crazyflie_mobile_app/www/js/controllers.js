@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('JoystickCtrl', function ($scope, $ionicPlatform, $cordovaDeviceMotion, $ionicPopup) {
+.controller('JoystickCtrl', function ($scope, MotionReader) {
 	$scope.leftOffset = 125;
 	$scope.topOffset = 125;
 	$scope.options = { frequency: 20 };
@@ -54,74 +54,9 @@ angular.module('starter.controllers', [])
 		y: 0,
 		alpha: 0
 	}
-	$scope.rotation = 0;
-	$scope.rotationScale = 1;
-
-	// $scope.val = 150;
-	var watch;
-	var xArr = [];
-	var yArr = [];
-	var currentIdx = 0;
-	var easeLength = 5;
-
-	$scope.prepareArray = function (arr, n) {
-		for (var i = 0; i< n; i++) {
-			arr[i] = 0;
-		}
-	}
-
-	$scope.getEasedValues = function (newX, newY) {
-		var xAverage = 0.0;
-		var yAverage = 0.0;
-
-		xArr[currentIdx] = newX;
-		yArr[currentIdx] = newY;
-		
-		if (currentIdx < easeLength -1 ) {
-			currentIdx++;
-		} else {
-			currentIdx = 0; 
-		}
-
-		for (var i=0; i < easeLength; i++) {
-			xAverage += xArr[i];
-			yAverage += yArr[i];
-		}
-
-		xAverage = xAverage / easeLength;
-		yAverage = yAverage / easeLength;
-
-		return [xAverage, yAverage];
-	}
-
-	$scope.onUpdateSuccess = function(acc) {
-		var averages = $scope.getEasedValues(acc.x, acc.y);
-		$scope.val.x = averages[0];
-		$scope.val.y = averages[1];
-	};
-
-	$scope.startWatcher = function () {
-		if (!watch) {
-			watch = $cordovaDeviceMotion.watchAcceleration($scope.options);
-			watch.promise.then(function() {/* unused */}, $scope.showError, $scope.onUpdateSuccess);
-		}
-	}
-
-	$scope.showError = function() {
-	    var alertPopup = $ionicPopup.alert({
-	        title: 'Error',
-	        template: 'Problem with accelerometer!'
-	    });
-	    alertPopup.then(function () {
-	    	
-	    })
-	};
-
-	$ionicPlatform.ready(function () {
-		$scope.prepareArray(xArr, easeLength);
-		$scope.prepareArray(yArr, easeLength);
-		$scope.startWatcher();
-	})
+	// $scope.rotation = 0
+	MotionReader.startatcher();
+	$scope.val = angular.extend(MotionReader.value, $scope.val);
 })
 
 .controller('FriendsCtrl', function ($scope, Friends) {

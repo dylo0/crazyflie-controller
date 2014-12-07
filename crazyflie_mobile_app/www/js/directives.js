@@ -1,16 +1,15 @@
 angular.module('starter.directives', [])
-.directive('accelJoystick', function () {
+.directive('accelJoystick', function (Settings) {
 	return {
 		restrict: 'AE',
 		template: '<canvas style="width:300px;height:300px" id="canvas" width="1200" height="1200"></canvas>',
 		scope: {
-			coords: '=',
-			rotation: '=',
-			rotationScale: '='
+			coords: '='
 		},
 		link: function (scope, element, attrs) {
 			var canvas;
 			var rotationStartX;
+			var rotator = attrs.rotator || true;
 
 			scope.$watch('coords', function (val) {
 				// todo - remove hardcoded values ( 48, -48, 0.01)
@@ -47,18 +46,17 @@ angular.module('starter.directives', [])
 			}
 			
 			scope.drawRotator = function (ctx, centerX, centerY, radius, rotation) {
-				console.log('drawing rotator');
+	            // Ring parameters are for now hardcoded
 	            for (var i=1; i<26; i+=2) {
-	            ctx.beginPath();
-	            ctx.lineWidth = 80;
-	            ctx.strokeStyle = "#D9D9D9";
-	            var alpha = Math.PI *rotation;
-	            ctx.arc(centerX, centerY, radius, i * Math.PI / 13 + alpha, (i * Math.PI / 13) + Math.PI/15 + alpha, false);
-	            ctx.stroke();
+		            ctx.beginPath();
+		            ctx.lineWidth = 80;
+		            ctx.strokeStyle = "#D9D9D9";
+		            var alpha = Math.PI *rotation;
+		            ctx.arc(centerX, centerY, radius, i * Math.PI / 13 + alpha, (i * Math.PI / 13) + Math.PI/15 + alpha, false);
+		            ctx.stroke();
 	            }
 
 			}
-
 
 			// joy manipulation functions
 			scope.onTouchStart = function (event) {
@@ -82,8 +80,10 @@ angular.module('starter.directives', [])
 		            ctx.clearRect(0,0, canvas.width, canvas.height);
 
 		            scope.drawBackground(ctx, centerX, centerY, radius);
+		            if (rotator) {
+		            	scope.drawRotator(ctx, centerX, centerY, radius, rotation);
+		            }
 		            scope.drawPointer(ctx, centerX - valX, centerY - valY);
-		            scope.drawRotator(ctx, centerX, centerY, radius, rotation);
 		        }
 			}
 
@@ -91,6 +91,7 @@ angular.module('starter.directives', [])
 		}
 	}
 })
+
 .directive('integer', function(){
     return {
         require: 'ngModel',
@@ -101,6 +102,7 @@ angular.module('starter.directives', [])
         }
     };
 })
+
 .directive('float', function(){
     return {
         require: 'ngModel',
