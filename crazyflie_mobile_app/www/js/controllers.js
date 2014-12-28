@@ -54,9 +54,30 @@ angular.module('starter.controllers', [])
 		y: 0,
 		alpha: 0
 	}
-	// $scope.rotation = 0
-	MotionReader.startatcher();
+
+	var setUpdateInterval = function () {
+	      update = $interval(function () {
+	      var velocity = MotionReader.value;
+
+	      x = (x - velocity.x * Settings.acceleration.speed) % window.innerWidth;
+	      y = (y + velocity.y * Settings.acceleration.speed) % window.innerHeight;
+
+	      if (x < 0 ) {
+	        x = window.innerWidth;
+	      }
+
+	      if (y < 0) {
+	        y = window.innerHeight;
+	      }
+	      
+	      $scope.tesselationAPI.updatePointer(x,y);
+	    }, 33);
+	  }
+
+	
+	MotionReader.startWatcher();
 	$scope.val = angular.extend(MotionReader.value, $scope.val);
+
 })
 
 .controller('FriendsCtrl', function ($scope, Friends) {
@@ -70,6 +91,7 @@ angular.module('starter.controllers', [])
 .controller('SettingsCtrl', function ($scope, Settings) {
 	$scope.position = Settings.position;
 	$scope.rotation = Settings.rotation;
+	$scope.serverAdress = Settings.server.ip;
 
 	$scope.test = function () {
 		console.log(Settings);

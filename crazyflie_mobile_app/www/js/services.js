@@ -25,7 +25,24 @@ angular.module('starter.services', [])
   }
 })
 
-.service('MotionReader', function ($ionicPlatform, $cordovaDeviceMotion, $ionicPopup, Settings) {
+.factory('Sockets', function (socketFactory, Settings) {
+    console.log('initializing sockets');
+    var serverAdress = Settings.server.ip || 'http://192.168.1.108:3000';
+
+    var ioSocket = io(serverAdress);
+
+    var socket = socketFactory({
+      ioSocket: ioSocket
+    });
+
+    console.log('connecting to', serverAdress);
+    return {
+      socket: socket
+    }
+})
+
+.service('MotionReader', function ($ionicPlatform, $cordovaDeviceMotion, $ionicPopup, Settings, Sockets) {
+  console.log('calling motionreaeder');
   var watch;
   var xArr = [];
   var yArr = [];
@@ -73,6 +90,8 @@ angular.module('starter.services', [])
         averages[0] = 0;
       }
     }
+
+    Sockets.socket.emit('device:update', averages);
 
     currentValue.x = averages[0];
     currentValue.y = averages[1];
@@ -127,5 +146,9 @@ angular.module('starter.services', [])
     reverse: false,
     sensitivity: 0.5,
     returnTime: 2
+  }
+
+  this.server = {
+    ip: 'http://192.168.1.108:3000'
   }
 });
